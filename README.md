@@ -26,18 +26,23 @@ The dataset used in this project is internal to the organization, containing the
 
 ## ✅ Task List
 
-1. **Obtain the current back-ordered parts list with inventory stage and ETA**
-   - Includes back order hold type with no picking release date & active part status.
-2. **Merge real-time transportation status of parts**
-3. **Merge detailed part information** 
-   - Includes model, first receipt date, and part grade.
-4. **Identify accessory or BER parts**
-   - As these are managed with different criteria.
-5. **Merge substitute parts data with original parts**
-   - Service parts may have substitute parts for flexible management.
-6. **Merge demand history data**
-   - Allows buyers to understand demand-related reasons behind back orders.
-7. **Add new features** 
-   - Including "New Part Check," "Streak," "RA history," and "Flag" (based on ETA).
-8. **Import the final DataFrame to Tableau** 
-   - For a user-friendly real-time tracker.
+1. **Obtain the Demand History of All HA Parts**
+   - Data is retrieved via SQL from the EDW (Enterprise Data Warehouse).
+   - Detailed part information, including item status, grade, and creation date, is imported.
+   - Substitute part information and demand are also included to assess part activity and filter out original parts from the E&O list based on substitute demand.
+
+2. **Merging and Filtering on Dataframe**
+   - Include only parts registered for more than 1.5 years (parts registered under 1.5 years are generally not considered E&O).
+   - Filter parts based on item status (Active).
+   - Exclude original parts if substitute parts show an average monthly demand greater than 1 over the past 3 months.
+   - Handle large orders from PD (high-volume customers) by adjusting orders that exceed the average demand by 300% to zero, ensuring model generalization.
+
+3. **Building Logic to Flag Potential E&O Parts**
+   - Divide demand history into three sectors (Sector 1, 2, and 3) to analyze increasing or decreasing demand trends.
+   - Using the E&O list generated from this logic and actual E&O parts registered in the system, I identified the overlapping parts and calculated the average demand decline between sectors for validation: Sector 1 to Sector 2 (38.8%) and Sector 2 to Sector 3 (57.7%).
+
+4. **Visualizing Potential E&O Parts with Demand Trends**
+   - Display demand changes over time for E&O parts, enabling trend validation and illustrating the decrease in demand for items on the E&O list.
+
+
+
