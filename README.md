@@ -1,6 +1,7 @@
 # E&O Parts Early Sensing Tool
 
 **Description**
+
 This project automatically detects parts likely to become Excessive and Obsolete (E&O) by analyzing three years of demand trends. The goal is to identify at-risk parts early, sharing the list with buyers to guide order placement and prevent unnecessary purchases. This process also enables buyers to cancel orders on obsolete parts, saving approximately $13,000 monthly in transportation costs and supporting optimal warehouse management.
 
 For some parts, demand graphs may show occasional ongoing demand, though in very low quantities (fewer than three). In such cases, our team chooses air transportation rather than warehousing, minimizing storage costs while ensuring availability.
